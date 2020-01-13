@@ -47,6 +47,14 @@
   dependencies:
     "@hapi/hoek" "9.x.x"
 
+"@hapi/basic@^6.0.0":
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/@hapi/basic/-/basic-6.0.0.tgz#d8372a8eea9583f7077c60b8d55eb5f3a447d4ef"
+  integrity sha512-nWWSXNCq3WptnP3To2c8kfQiRFDUnd9FQOcMS0B85y1x/m12c0hhp+VdmK60BMe44k6WIog1n6g8f9gZOagqBg==
+  dependencies:
+    "@hapi/boom" "9.x.x"
+    "@hapi/hoek" "9.x.x"
+
 "@hapi/boom@8.x.x":
   version "8.0.1"
   resolved "https://registry.yarnpkg.com/@hapi/boom/-/boom-8.0.1.tgz#13f1f2f2a3abfb0787c79e35e238c8aff6aa1661"

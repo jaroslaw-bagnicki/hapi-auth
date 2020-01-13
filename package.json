@@ -12,6 +12,7 @@
     "nodemon": "^2.0.2"
   },
   "dependencies": {
+    "@hapi/basic": "^6.0.0",
     "@hapi/hapi": "^19.0.4"
   }
 }
