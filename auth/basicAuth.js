@@ -1,25 +1,5 @@
 const bcrypt = require('bcrypt');
-
-/** @typedef {{
-    id: string,
-    username: string,
-    password: string,
-    name: string,
-}} User */
-
-/** @typedef {Pick<User, 'id' | 'name'>} Credentials */
-
-/** @type {User[]} */
-const users = [
-    {
-        id: '2133d32a',
-        username: 'jankowalski',
-        name: 'Jan Kowalski',
-        password: bcrypt.hashSync('kowalski1', 1),
-    },
-];
-
-
+const users = require('../models/users');
 
 /** @type {import('@hapi/basic').Validate} */
 exports.validate = async (req, username, password, h) => {
@@ -36,7 +16,7 @@ exports.validate = async (req, username, password, h) => {
 
     return {
         isValid: isValid,
-        /** @type {Credentials} */
+        /** @type {import('../models/users').Credentials} */
         credentials: {
             id: user.id,
             name: user.name, 

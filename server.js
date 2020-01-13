@@ -1,6 +1,8 @@
 const { Server } = require('@hapi/hapi');
 const basicAuthScheme = require('@hapi/basic');
-const { validate } = require('./auth/basicAuth');
+const cookieAuthScheme = require('@hapi/cookie');
+const basicAuthConfig = require('./auth/basicAuth');
+const cookieAuthConfig = require('./auth/cookieAuth');
 const routes = require('./routes');
 
 const server = new Server({
@@ -10,10 +12,14 @@ const server = new Server({
 /** @type {Promise[]} */
 const pluginsRegisterationPromisies = [
     server.register(basicAuthScheme),
+    server.register(cookieAuthScheme),
+    
 ];
 
-server.auth.strategy('simple', 'basic', { validate });
-server.auth.default('simple');
+server.auth.strategy('simple', 'basic', basicAuthConfig);
+server.auth.strategy('session', 'cookie', cookieAuthConfig);
+
+server.auth.default('session');
 
 server.route(routes);
 
