@@ -1,6 +1,6 @@
 const { Server } = require('@hapi/hapi');
 const basicAuthScheme = require('@hapi/basic');
-const { validate } = require('./auth');
+const { validate } = require('./auth/basicAuth');
 const routes = require('./routes');
 
 const server = new Server({
