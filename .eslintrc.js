@@ -16,5 +16,6 @@ module.exports = {
         "no-unused-vars": "warn",
         "semi": "error",
         "quotes": ["error", "single"],
+        "comma-dangle": ["warn", "always-multiline"],
     }
 };

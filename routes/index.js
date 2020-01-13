@@ -3,6 +3,6 @@ module.exports = [
     {
         method: 'GET',
         path: '/',
-        handler: (req, h) => h.response('Hello world!'),
+        handler: (req, h) => h.response({ message: 'Hello world!' }),
     },
 ];
