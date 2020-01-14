@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 const users = require('../models/users');
-const { cookieName } = require('../config');
+const { COOKIE_NAME, JWT_SECRET } = require('../config');
 
 /** @type {import('@hapi/hapi').ServerRoute[]} */
 module.exports = [
@@ -8,29 +9,21 @@ module.exports = [
         method: 'GET',
         path: '/',
         handler: (req, h) => h.response({ message: 'Hello world!' }),
-    },
-    {
-        method: 'GET',
-        path: '/login',
-        handler: (req, h) => h.response(`<html>
-            <head>
-                <title>Login page</title>
-            </head>
-            <body>
-                <h3>Please Log In</h3>
-                <form method="post" action="/login">
-                    Username: <input type="text" name="username"><br>
-                    Password: <input type="password" name="password"><br/>
-                <input type="submit" value="Login"></form>
-            </body>
-        </html>`),
         options: {
             auth: false,
         },
     },
     {
+        method: 'GET',
+        path: '/restricted',
+        handler: (req, h) => h.response({ message: 'Hello world!' }),
+        options: {
+            auth: 'token',
+        },
+    },
+    {
         method: 'POST',
-        path: '/login',
+        path: '/session-login',
         handler: (req, h) => {
             const { username, password } = /** @type {{ username: string, password: string}} */ (req.payload);
             const user = users.find(user => user.username === username);
@@ -51,7 +44,31 @@ module.exports = [
     },
     {
         method: 'POST',
-        path: '/logout',
-        handler: (req, h) => h.response().unstate(cookieName),
+        path: '/session-logout',
+        handler: (req, h) => h.response().unstate(COOKIE_NAME),
+    },
+    {
+        method: 'POST',
+        path: '/token-login',
+        handler: (req, h) => {
+            const { username, password } = /** @type {{ username: string, password: string}} */ (req.payload);
+            const user = users.find(user => user.username === username);
+
+            if (user && bcrypt.compareSync(password, user.password)) {
+                const token = jwt.sign({ id: user.id }, JWT_SECRET);
+                return h.response({
+                    success: true,
+                    message: 'Authentication successful!',
+                    id_token: token, 
+                });
+            }
+            return h.redirect('/login');
+
+        },
+        options: {
+            auth: {
+                mode: 'try',
+            },
+        },
     },
 ];

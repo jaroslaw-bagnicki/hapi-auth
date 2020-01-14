@@ -1,1 +1,2 @@
-exports.cookieName = 'hapi-auth-tutorial';
+exports.COOKIE_NAME = 'hapi-auth-tutorial';
+exports.JWT_SECRET = 'secret';
