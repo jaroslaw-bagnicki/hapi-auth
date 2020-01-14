@@ -1,5 +1,6 @@
 const bcrypt = require('bcrypt');
 const users = require('../models/users');
+const { cookieName } = require('../config');
 
 /** @type {import('@hapi/hapi').ServerRoute[]} */
 module.exports = [
@@ -47,5 +48,10 @@ module.exports = [
                 mode: 'try',
             },
         },
+    },
+    {
+        method: 'POST',
+        path: '/logout',
+        handler: (req, h) => h.response().unstate(cookieName),
     },
 ];

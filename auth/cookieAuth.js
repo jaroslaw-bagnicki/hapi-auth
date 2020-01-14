@@ -1,9 +1,11 @@
 const users = require('../models/users');
+const { cookieName } = require('../config');
 
 /** @type {import('@hapi/cookie').Options} */
 module.exports = {
     cookie: {
-        name: 'sid-example',
+        name: cookieName,
+        encoding: 'iron',
         password: '!wsYhFA*C2U6nz=Bu^%A@^F#SF3&kSR6',
         isSecure: false,
     },

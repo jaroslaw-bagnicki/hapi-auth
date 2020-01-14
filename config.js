@@ -1,0 +1,1 @@
+exports.cookieName = 'hapi-auth-tutorial';
