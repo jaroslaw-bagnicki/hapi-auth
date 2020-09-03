@@ -14,7 +14,7 @@
   "dependencies": {
     "@hapi/basic": "^6.0.0",
     "@hapi/cookie": "^11.0.0",
-    "@hapi/hapi": "^19.0.4",
+    "@hapi/hapi": "^19.1.1",
     "bcrypt": "^3.0.7",
     "hapi-auth-jwt2": "^8.8.1",
     "jsonwebtoken": "^8.5.1"
